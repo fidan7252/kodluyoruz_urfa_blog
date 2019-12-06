@@ -1,0 +1,14 @@
+{% extends 'base/master.html' %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <input name="email" type="email" placeholder="email gir">
+    <input name="password" type="password" placeholder="pass gir">
+    <button type="submit">
+        Giris Yap
+    </button>
+</form>
+
+{% endblock %}
