@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 def login_user(request):
     if request.method == "POST":
-        user_name = request.POST.get('email')
+        username = request.POST.get('email')
         password = request.POST.get('password')
-        if user_name and password:
+        if username and password:
             user = authenticate(
-                request, username=user_name,
+                request, username=username,
                 password=password
             )
             print(user)
@@ -17,7 +18,7 @@ def login_user(request):
                 login(request, user)
                 messages.add_message(
                     request, messages.SUCCESS, 
-                    f'Hosgeldin {user_name}'
+                    f'Hosgeldin {username}'
                 )
                 return redirect('home')
             else:
@@ -37,4 +38,23 @@ def logout_user(request):
     return redirect('home')
 
 
-# def sign_up(request):
+def sign_up(request):
+    if request.method == "POST":
+        r_post = request.POST
+        username = r_post.get('email')
+        password = r_post.get('password')
+        password2 = r_post.get('password2')
+        if username and (password == password2):
+            user = User.objects.create_user(
+                username, 
+                username, 
+                password
+            )
+            auth = authenticate(
+                request, username=username,
+                password=password
+            )
+            login(request, auth)
+            return redirect('home')
+
+    return render(request, 'blog_user/sign_up.html',{})

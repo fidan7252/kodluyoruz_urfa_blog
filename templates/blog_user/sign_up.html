@@ -1,18 +1,17 @@
 {% extends 'base/master.html' %}
 
 {% block content %}
-
+<h2>Kayit Ol</h2>
 <form method="POST">
     {% csrf_token %}
     <input name="email" type="email" placeholder="email gir">
     <input name="password" type="password" placeholder="pass gir">
-    <button type="submit">
-        Giris Yap
+    <input name="password2" type="password" placeholder="pass tekrar gir">
+    <button type="submit" class="btn btn-primary">
+        Kayit Ol
     </button>
 </form>
-
-<a href="{% url 'signup' %}">
-    Uye Ol
-</a>
+<hr>
+<a href="{% url 'login' %}">Giris Yap'a Git</a>
 
 {% endblock %}
