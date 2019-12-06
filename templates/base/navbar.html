@@ -17,9 +17,18 @@
         </a>
     </li>
     {% endfor %}
+    {% if request.user.is_authenticated %}
     <li>
-        <a href="{% url 'login' %}">
-            Giris Yap
+        {{ user.username }} <a href="{% url 'logout' %}">
+            Oturumu Kapat
         </a>
     </li>
+    
+    {% else %}
+        <li>
+            <a href="{% url 'login' %}">
+                Giris Yap
+            </a>
+        </li>
+    {% endif %}
 </ul>
