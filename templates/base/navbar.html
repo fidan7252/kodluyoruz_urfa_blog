@@ -19,14 +19,14 @@
     <li class="nav-item nav-link">
         {{ user.username }} 
     </li>
-    <a class="nav-item nav-link" href="{% url 'logout' %}">
+    <a class="nav-item btn btn-outline-light" href="{% url 'logout' %}">
             Oturumu Kapat
-        </a>
-    </li>
+    </a>
+
     
     {% else %}
         
-    <a class="nav-item nav-link" href="{% url 'login' %}">
+    <a class="nav-item btn btn-outline-light" href="{% url 'login' %}">
         Giris Yap
     </a>
     {% endif %}

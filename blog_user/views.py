@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 
 def login_user(request):
@@ -14,12 +15,26 @@ def login_user(request):
             print(user)
             if user is not None:
                 login(request, user)
+                messages.add_message(
+                    request, messages.SUCCESS, 
+                    f'Hosgeldin {user_name}'
+                )
                 return redirect('home')
             else:
-                print('login olamadin')
+                messages.add_message(
+                    request, messages.WARNING, 
+                    'Giris Yapamadiniz'
+                )
     return render(request, 'blog_user/login.html', {})\
 
 
 def logout_user(request):
     logout(request)
+    messages.add_message(
+        request, messages.SUCCESS, 
+        'Oturumu Kapattiniz'
+    )
     return redirect('home')
+
+
+# def sign_up(request):
