@@ -1,0 +1,21 @@
+{% extends 'base/master.html' %}
+
+{% block content %}
+
+{% if category %}
+    <h2>{{ category.title }}</h2>
+{% endif %}
+
+<ul>
+{% for item in items %}
+    <li>
+        <a href="{{ item.get_absolute_url }}" 
+            class=""
+        >
+            {{ item.title }} - {{ item.get_absolute_url }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

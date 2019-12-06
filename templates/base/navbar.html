@@ -1,0 +1,21 @@
+<ul>
+    <li>
+        <a href="{% url 'home' %}">
+            Ana Sayfa
+        </a>
+    </li>
+    {% for item in categories %}
+    <li>
+        <a href="{{ item.get_absolute_url }}">
+            {% comment %}
+                {% url 'cat' cat_slug=item.slug %} <br>
+                {{ item.get_absolute_url }} <br>
+                {{ item.title }} <br>
+                {{ item.slug }} <br>
+            {% endcomment %}
+            {{ item.title }}
+        </a>
+    </li>
+    {% endfor %}
+    
+</ul>
