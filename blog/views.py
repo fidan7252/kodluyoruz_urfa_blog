@@ -54,14 +54,18 @@ def add_category(request):
             r_post = request.POST
             title = r_post.get('title')
             try:
-                Category.objects.create(
-                    title = title,
-                    slug = title,
+                item = Category.objects.create(
+                    title = title, slug = title,
                 )
                 messages.add_message(
-                    request, messages.SUCCESS, 
-                    f'{title} Kaydedildi'
+                    request, messages.SUCCESS, f'{title} Kaydedildi'
                 )
+                if request.user.is_superuser:
+                    item.status = "published"
+                    item.save()
+                    messages.add_message(
+                        request, messages.SUCCESS, f'{title} Yayinlandi'
+                    )
                 return redirect('home')
             except:
                 messages.add_message(
