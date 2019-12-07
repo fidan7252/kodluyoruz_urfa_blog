@@ -5,11 +5,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link active" href="{% url 'home' %}">Ana Sayfa <span class="sr-only">(current)</span></a>
+                {% url 'home' as home %}
+            <a class="nav-item nav-link {% if home == request.path %}active{% endif %}" href="{{ home }}">Ana Sayfa <span class="sr-only">(current)</span></a>
 
             {% for item in categories %}
 
-            <a class="nav-item nav-link" href="{{ item.get_absolute_url }}">
+            <a 
+            class="
+            nav-item nav-link 
+            {% if item.get_absolute_url == request.path %}active{% endif %}
+            " href="{{ item.get_absolute_url }}"
+            >
                 {{ item.title }}
             </a>
 
