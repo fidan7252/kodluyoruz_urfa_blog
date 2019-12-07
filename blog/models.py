@@ -75,9 +75,15 @@ class Post(models.Model):
         choices=STATUS,
         default=DEFAULT_STATUS,
     )
+    viewed = models.PositiveIntegerField(default=0)
     is_home = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def user_viewed(self):
+        self.viewed += 1
+        self.save()
+        return f"{self.viewed}"
 
     def get_tags_in_a(self):
         return self.tags.filter(
@@ -95,7 +101,7 @@ class Post(models.Model):
         # return f"/category/{self.slug}/"
         # /category/self.slug/
         return reverse(
-            'post_detail', 
+            'post_detail',  #urls.py
             kwargs={
                 'cat_slug': self.category.slug,
                 'post_slug': self.slug 

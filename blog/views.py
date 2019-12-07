@@ -39,5 +39,6 @@ def post_detail(request, cat_slug, post_slug):
     context['item'] = Post.objects.get(
         slug=post_slug
     )
+    context['item'].user_viewed()
     # context['item'] = Post.objects.get(slug=post_slug)
     return render(request, 'blog/post.html', context)
