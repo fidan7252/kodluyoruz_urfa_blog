@@ -75,3 +75,23 @@ def add_category(request):
 
     return render(request, 'blog/add_category.html', {})
 
+
+
+def category_list(request):
+    context = dict()
+    categories = Category.objects.all()
+    context = {
+        'categories_list': categories,
+        'is_super': request.user.is_superuser
+    }
+    return render(request, 'blog/categories.html', context)
+
+
+def category_update_status(request, category_id, status):
+    instance = Category.objects.get(id=category_id)
+    instance.status = status
+    instance.save()
+    messages.add_message(request, messages.SUCCESS, 
+        f"{instance.title} Silindi"
+    )
+    return redirect('category_list')
