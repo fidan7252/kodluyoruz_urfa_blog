@@ -13,6 +13,7 @@ def index(request, cat_slug=None):
     if cat_slug:
         category = Category.objects.get(slug=cat_slug)
         context['category'] = category
+        category.user_viewed()
         context['items'] = context['items'].filter(
             category=category
         )
@@ -36,9 +37,11 @@ def index(request, cat_slug=None):
 
 def post_detail(request, cat_slug, post_slug):
     context = dict()
-    context['item'] = Post.objects.get(
+    item = Post.objects.get(
         slug=post_slug
     )
-    context['item'].user_viewed()
+    context['item'] = item
+    item.user_viewed()
+    # print(context['item'].category.user_viewed())
     # context['item'] = Post.objects.get(slug=post_slug)
     return render(request, 'blog/post.html', context)

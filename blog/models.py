@@ -17,6 +17,7 @@ class Category(models.Model):
         blank=True, 
         unique=True,
     )
+    viewed = models.PositiveIntegerField(default=0)
     status = models.CharField(
         max_length=10,
         choices=STATUS,
@@ -24,6 +25,11 @@ class Category(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def user_viewed(self):
+        self.viewed += 1
+        self.save()
+        return f"{self.viewed}"
 
     def get_absolute_url(self):
         # return f"/category/{self.slug}/"
