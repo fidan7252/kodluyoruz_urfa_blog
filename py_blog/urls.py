@@ -10,6 +10,7 @@ urlpatterns = [
     path('signup/', blog_user_views.sign_up, name='signup'),
     path('category/<slug:cat_slug>/', blog_views.index, name='cat'),
     path('category/<slug:cat_slug>/<slug:post_slug>/', blog_views.post_detail, name='post_detail'),
+    path('add_category/', blog_views.add_category, name='add_category'),
     path('admin/', admin.site.urls),
 ]
 

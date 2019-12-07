@@ -2,8 +2,10 @@
 
 {% block content %}
 
+
 <form method="POST">
     {% csrf_token %}
+    <label for="email">Email gir:</label>
     <input name="email" type="email" placeholder="email gir">
     <input name="password" type="password" placeholder="pass gir">
     <button type="submit">

@@ -25,6 +25,13 @@
     <li class="nav-item nav-link">
         {{ user.username }} 
     </li>
+        {% if request.user.is_staff  %}
+            <a class="nav-item nav-link" href="{% url 'add_category' %}">
+                Kategori Ekle
+            </a>
+    
+        {% endif %}
+    
     <a class="nav-item btn btn-outline-light" href="{% url 'logout' %}">
             Oturumu Kapat
     </a>

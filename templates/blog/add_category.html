@@ -1,0 +1,16 @@
+{% extends 'base/master.html' %}
+
+{% block content %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <input name="title" type="text" 
+        placeholder="kategori ismi gir"
+    >
+    <button type="submit" class="btn btn-primary">
+        Kaydet
+    </button>
+</form>
+
+{% endblock %}
